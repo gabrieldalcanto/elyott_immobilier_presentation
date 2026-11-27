@@ -34,8 +34,8 @@ header{position:sticky;top:0;z-index:50;background:#fff;transition:box-shadow .2
 header.scrolled{box-shadow:0 2px 18px rgba(27,42,107,.1)}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:20px;height:84px;transition:height .25s}
 header.scrolled .bar{height:68px}
-.logo img{height:44px;width:auto;transition:height .25s}
-header.scrolled .logo img{height:36px}
+.logo img{height:54px;width:auto;transition:height .25s}
+header.scrolled .logo img{height:44px}
 nav.main{display:flex;gap:6px}
 nav.main a{position:relative;padding:10px 14px;font-size:15px;font-weight:500;color:#262626;border-radius:10px}
 nav.main a::after{content:"";position:absolute;left:14px;right:14px;bottom:4px;height:3px;border-radius:2px;background:var(--yellow);transform:scaleX(0);transform-origin:left;transition:transform .25s}
@@ -50,7 +50,7 @@ nav.main a.active{color:var(--navy);font-weight:600}
 .drawer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:60;background:var(--navy);padding:0 20px 40px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;transform:translateY(-12px);opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s}
 .drawer-in{min-height:calc(100% + 1px)}
 .drawer-top{display:flex;align-items:center;justify-content:space-between;height:68px;margin-bottom:8px}
-.drawer-top img{height:36px;width:auto}
+.drawer-top img{height:44px;width:auto}
 .drawer-close{width:48px;height:48px;padding:0;border:0;border-radius:12px;background:var(--yellow);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#000}
 .drawer.open{transform:none;opacity:1;visibility:visible}
 .drawer a.row{display:flex;justify-content:space-between;align-items:center;padding:16px 4px;border-bottom:1px solid rgba(255,255,255,.14);font-size:20px;font-weight:700;color:#fff}
@@ -180,7 +180,7 @@ form .fail{grid-column:1/-1;font-size:14px;font-weight:600;color:#C0262D}
 /* Footer */
 footer{background:var(--navy);color:#DCE3F5;padding:64px 0 32px;font-size:14px}
 .foot{display:grid;grid-template-columns:1.3fr 1fr 1.3fr 1fr;gap:36px}
-.foot img{height:50px;width:auto;margin-bottom:16px}
+.foot img{height:58px;width:auto;margin-bottom:16px}
 .foot h4{margin:0 0 14px;font-size:15px;color:#fff}
 .foot nav,.foot .col{display:flex;flex-direction:column;gap:10px}
 .foot a:hover{color:var(--yellow)}
@@ -217,7 +217,7 @@ footer{background:var(--navy);color:#DCE3F5;padding:64px 0 32px;font-size:14px}
   nav.main,.actions .client span,.actions .btn{display:none}
   .burger{display:flex}
   .client{width:48px;padding:0;justify-content:center}
-  .bar{height:68px}.logo img{height:36px}
+  .bar{height:68px}.logo img,header.scrolled .logo img{height:44px}
   html{scroll-padding-top:76px;scroll-padding-bottom:92px}
   .wrap{padding:0 20px}
   .hero{--w:min(calc((100vw - 28px) * .7),320px)}
