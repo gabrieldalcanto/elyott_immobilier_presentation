@@ -45,10 +45,11 @@ nav.main a.active{color:var(--navy);font-weight:600}
 .burger{display:none;flex-direction:column;width:48px;height:48px;padding:0;border:0;border-radius:12px;background:var(--yellow);cursor:pointer;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
 .burger span{display:block;width:20px;height:2.4px;background:#000;border-radius:2px;transition:transform .25s,opacity .2s}
 .burger span+span{margin-top:5px}
-.burger[aria-expanded=true] span:nth-child(1){transform:translateY(7.4px) rotate(45deg)}
-.burger[aria-expanded=true] span:nth-child(2){opacity:0}
-.burger[aria-expanded=true] span:nth-child(3){transform:translateY(-7.4px) rotate(-45deg)}
-.drawer{position:fixed;top:68px;left:0;right:0;bottom:0;z-index:45;background:var(--navy);padding:8px 20px 40px;overflow-y:auto;overscroll-behavior:contain;transform:translateY(-12px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+.drawer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:60;background:var(--navy);padding:0 20px 40px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;transform:translateY(-12px);opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s}
+.drawer-in{min-height:calc(100% + 1px)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;height:68px;margin-bottom:8px}
+.drawer-top img{height:36px;width:auto}
+.drawer-close{width:48px;height:48px;padding:0;border:0;border-radius:12px;background:var(--yellow);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#000}
 .drawer.open{transform:none;opacity:1;visibility:visible}
 .drawer a.row{display:flex;justify-content:space-between;align-items:center;padding:16px 4px;border-bottom:1px solid rgba(255,255,255,.14);font-size:20px;font-weight:700;color:#fff}
 .drawer a.row span{color:var(--yellow)}
@@ -246,13 +247,16 @@ footer{background:var(--navy);color:#DCE3F5;padding:64px 0 32px;font-size:14px}
   </div>
 </header>
 
-<div class="drawer" id="drawer">
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+<div class="drawer-in">
+  <div class="drawer-top"><img src="wordmark-blanc.png" alt="Elyott Immobilier"><button class="drawer-close" id="closeMenu" type="button" aria-label="Fermer le menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <a class="row" href="#metiers">Nos métiers <span aria-hidden="true">→</span></a>
   <a class="row" href="#societe">Notre société <span aria-hidden="true">→</span></a>
   <a class="row" href="#agences">Nos agences <span aria-hidden="true">→</span></a>
   <a class="row" href="#contact">Vendre &amp; estimer <span aria-hidden="true">→</span></a>
   <a class="row" href="https://extranet2.ics.fr/V5/connexion-elyott.html" target="_blank" rel="noopener">Espace clients <span aria-hidden="true">→</span></a>
   <a class="btn" href="#contact">Demander un devis</a>
+</div>
 </div>
 
 <main>
@@ -407,20 +411,18 @@ function onScroll(){
   if(sc!==wasScrolled){hdr.classList.toggle('scrolled',sc);wasScrolled=sc}
   if(tp!==wasTop){topBtn.classList.toggle('show',tp);wasTop=tp}
   if(wide()&&!calm&&y<900)disc.style.transform='translate3d(0,'+(y*0.12)+'px,0)';
-  if(drawer.classList.contains('open'))placeDrawer();
 }
 addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
 topBtn.onclick=()=>scrollTo({top:0,behavior:'smooth'});
-function placeDrawer(){drawer.style.top=Math.max(0,Math.round(hdr.getBoundingClientRect().bottom))+'px'}
 function menu(open){
-  if(open)placeDrawer();
-  drawer.classList.toggle('open',open);burger.setAttribute('aria-expanded',open);burger.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');
-  document.documentElement.style.overflow=document.body.style.overflow=open?'hidden':'';
+  drawer.classList.toggle('open',open);burger.setAttribute('aria-expanded',open);
+  if(open)$('#closeMenu').focus({preventScroll:true});
 }
-burger.onclick=()=>menu(!drawer.classList.contains('open'));
+$('#closeMenu').onclick=()=>menu(false);
+burger.onclick=()=>menu(true);
 drawer.addEventListener('click',e=>{if(e.target.closest('a'))menu(false)});
 addEventListener('keydown',e=>{if(e.key==='Escape')menu(false)});
-addEventListener('resize',()=>{if(wide())menu(false);else{disc.style.transform='';if(drawer.classList.contains('open'))placeDrawer()}});
+addEventListener('resize',()=>{if(wide())menu(false);else disc.style.transform=''});
 
 /* Apparition au défilement + lien actif */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
