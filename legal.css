@@ -23,3 +23,8 @@ footer div{max-width:880px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 22p
 footer a{color:#DCE3F5}
 :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
 @media (max-width:560px){dl{grid-template-columns:minmax(0,1fr);gap:2px}dd{margin-bottom:10px}main{padding-top:32px}}
+.tbl{overflow-x:auto;margin:6px 0 12px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px;background:#fff;border-radius:12px;overflow:hidden}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid #E3E8F4}
+th{background:var(--navy);color:#fff;font-weight:600}
+tr:last-child td{border-bottom:0}

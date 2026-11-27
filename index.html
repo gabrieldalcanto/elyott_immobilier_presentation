@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Elyott Immobilier — maquette de refonte</title>
 <meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Elyott Immobilier : syndic de copropriété, transactions, gestion locative et locations saisonnières à Toulon, Marseille et Septèmes-les-Vallons.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -181,6 +183,29 @@ footer{background:var(--navy);color:#DCE3F5;padding:64px 0 32px;font-size:14px}
 .foot a:hover{color:var(--yellow)}
 .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(220,227,245,.2);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:13px}
 
+.carte{position:relative;aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:#fff}
+.carte iframe{display:block;width:100%;height:100%;border:0}
+.carte button{position:absolute;inset:0;width:100%;border:0;background:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--navy);padding:12px}
+.carte button svg{width:28px;height:28px;fill:var(--blue)}
+.carte button b{font-size:15px;font-weight:600}
+.carte button small{font-size:12.5px;color:var(--mute);text-align:center;line-height:1.35}
+.cookies{position:fixed;left:0;right:0;bottom:0;z-index:80;background:#fff;border-top:3px solid var(--yellow);box-shadow:0 -18px 40px -22px rgba(27,42,107,.45);transform:translateY(102%);transition:transform .4s ease;padding:20px 20px 22px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain}
+.cookies.open{transform:none}
+.cookies-in{max-width:1176px;margin:0 auto}
+.cookies h2{font-size:19px;letter-spacing:0;color:var(--navy);margin-bottom:8px}
+.cookies p{font-size:14.5px;line-height:1.55;color:var(--mute);max-width:78ch}
+.ck-btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px;max-width:460px}
+.ck-btns .btn{padding:12px 10px}
+.btn.line{background:#fff;border-color:var(--navy);color:var(--navy)}
+.ck-toggle{display:block;background:none;border:0;padding:12px 0 4px;min-height:44px;color:var(--mute);font-size:14.5px;text-decoration:underline;cursor:pointer}
+.ck{border-top:1px solid var(--line);margin-top:10px;padding-top:14px;display:grid;gap:14px;max-width:620px}
+.ck[hidden]{display:none}
+.ck-l{display:flex;gap:14px;align-items:flex-start;justify-content:space-between}
+.ck-l b,.ck-l label{font-size:15px;color:var(--navy);font-weight:600}
+.ck-l p{font-size:13.5px}
+.ck-l input{flex:0 0 auto;width:24px;height:24px;margin-top:2px;accent-color:var(--navy)}
+.ck-l span{flex:0 0 auto;font-size:12px;font-weight:600;color:var(--mute);white-space:nowrap}
+.ck a{font-size:13.5px;text-decoration:underline;color:var(--mute)}
 .dock{display:none}
 .top{position:fixed;right:24px;bottom:24px;z-index:40;width:48px;height:48px;border-radius:50%;border:0;background:var(--navy);color:#fff;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;transform:translateY(10px);box-shadow:0 8px 20px rgba(27,42,107,.3)}
 .top.show{opacity:1;pointer-events:auto;transform:none}
@@ -378,7 +403,7 @@ footer{background:var(--navy);color:#DCE3F5;padding:64px 0 32px;font-size:14px}
       <div><img src="wordmark-blanc.png" alt="Elyott Immobilier"><p>Syndic de copropriété, transactions, gestion locative et locations saisonnières. Une agence 100 % locale et indépendante.</p></div>
       <nav aria-label="Liens utiles"><h4>Liens utiles</h4><a href="#metiers">Nos métiers</a><a href="#societe">Notre société</a><a href="#agences">Nos agences</a><a href="#contact">Vendre &amp; estimer</a><a href="https://extranet2.ics.fr/V5/connexion-elyott.html" target="_blank" rel="noopener">Espace clients</a></nav>
       <div class="col"><h4>Contact</h4><span>Siège : 8 rue Peiresc, 83000 Toulon</span><span>Marseille : 33 rue des Électriciens, 13012</span><span>Septèmes : Chemin du Four à Chaux, 13240</span><a href="tel:+33456358010" style="color:var(--yellow);font-weight:600">04 56 35 80 10</a></div>
-      <nav aria-label="Informations légales"><h4>Légal</h4><a href="mentions-legales.html">Mentions légales</a><a href="politique-de-confidentialite.html">Politique de confidentialité</a><a href="politique-de-confidentialite.html#cookies">Gestion des cookies</a></nav>
+      <nav aria-label="Informations légales"><h4>Légal</h4><a href="mentions-legales.html">Mentions légales</a><a href="politique-de-confidentialite.html">Politique de confidentialité</a><a href="politique-de-confidentialite.html#cookies">Cookies et traceurs</a><a href="#cookies-gestion" data-cookies-reopen>Gérer les cookies</a></nav>
     </div>
     <div class="legal"><span>© Elyott Immobilier 2026. Tous droits réservés.</span><span>Carte professionnelle CPI 8305 2018 000 037 0051 (CCI du Var) · Garantie financière SOCAF</span></div>
   </div>
@@ -388,6 +413,24 @@ footer{background:var(--navy);color:#DCE3F5;padding:64px 0 32px;font-size:14px}
   <a class="btn navy" href="tel:+33456358010"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Appeler</a>
   <a class="btn" href="#contact">Demander un devis</a>
 </div>
+<aside class="cookies" id="cookies" hidden aria-labelledby="ckTitre">
+  <div class="cookies-in">
+    <h2 id="ckTitre">Cookies et services tiers</h2>
+    <p>Avec votre accord, nous utilisons <b>Google&nbsp;Analytics</b> pour savoir combien de personnes consultent le site et quelles pages les intéressent, et <b>Google&nbsp;Maps</b> pour afficher le plan de nos agences. Ces deux services déposent des cookies et transmettent votre adresse IP à Google. Aucune publicité, aucun profilage, aucune revente de vos données. Si vous refusez, le site fonctionne normalement et les plans restent consultables sur simple clic.</p>
+    <div class="ck-btns">
+      <button type="button" class="btn navy" id="ckAccept">Tout accepter</button>
+      <button type="button" class="btn line" id="ckRefuse">Tout refuser</button>
+    </div>
+    <button type="button" class="ck-toggle" id="ckToggle" aria-expanded="false" aria-controls="ckDetails">Choix détaillés</button>
+    <div class="ck" id="ckDetails" hidden>
+      <div class="ck-l"><div><b>Fonctionnement du site</b><p>Mémorise uniquement votre choix ci-dessus. Indispensable, donc toujours actif.</p></div><span>Toujours actif</span></div>
+      <div class="ck-l"><div><label for="ckAna">Mesure d'audience</label><p>Google Analytics (Google LLC, États-Unis) : 2 cookies, 13 mois maximum.</p></div><input type="checkbox" id="ckAna"></div>
+      <div class="ck-l"><div><label for="ckMaps">Plans des agences</label><p>Google Maps (Google Ireland Limited) : affiche la carte de chaque agence. Cookies et durées définis par Google.</p></div><input type="checkbox" id="ckMaps"></div>
+      <button type="button" class="btn" id="ckSave">Enregistrer mes choix</button>
+      <a href="politique-de-confidentialite.html#cookies">Détail de chaque cookie et de sa durée</a>
+    </div>
+  </div>
+</aside>
 <button class="top" id="top" aria-label="Revenir en haut de la page"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
 
 <script>
@@ -484,9 +527,9 @@ PROFILS.forEach((p,i)=>{
 
 /* Agences */
 const AG=[
- {n:'Toulon',tag:'SIÈGE',c:'#A8287A',a:'8 rue Peiresc',v:'83000 Toulon',q:'8 Rue Peiresc 83000 Toulon'},
- {n:'Marseille Saint-Barnabé',tag:'13012',c:'#1F78C8',a:'33 rue des Électriciens',v:'13012 Marseille',q:'33 Rue des Electriciens 13012 Marseille'},
- {n:'Septèmes-les-Vallons',tag:'13240',c:'#F5C518',t:'#000',a:'Chemin du Four à Chaux',v:'13240 Septèmes-les-Vallons',q:'Chemin du Four à Chaux 13240 Septèmes-les-Vallons'}
+ {n:'Toulon',tag:'SIÈGE',c:'#A8287A',g:'43.1267666,5.9286398',a:'8 rue Peiresc',v:'83000 Toulon',q:'8 Rue Peiresc 83000 Toulon'},
+ {n:'Marseille Saint-Barnabé',tag:'13012',c:'#1F78C8',g:'43.3045560,5.4171544',a:'33 rue des Électriciens',v:'13012 Marseille',q:'33 Rue des Electriciens 13012 Marseille'},
+ {n:'Septèmes-les-Vallons',tag:'13240',c:'#F5C518',t:'#000',g:'43.4074077,5.3695954',a:'Chemin du Four à Chaux',v:'13240 Septèmes-les-Vallons',q:'Chemin du Four à Chaux 13240 Septèmes-les-Vallons'}
 ];
 const agList=$('#agList'),agPanel=$('#agPanel');
 AG.forEach((g,i)=>{
@@ -494,9 +537,22 @@ AG.forEach((g,i)=>{
   b.innerHTML='<span class="tag">'+g.tag+'</span><span><strong>'+g.n+'</strong><small>'+g.a+', '+g.v+'</small></span>';
   b.onclick=()=>showAg(i);agList.append(b);
 });
+const PIN='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>';
+let mapsOn=false;
+function loadMap(){
+  const c=agPanel.querySelector('.carte');if(!c||c.querySelector('iframe'))return;
+  const f=document.createElement('iframe');
+  f.src='https://maps.google.com/maps?q='+encodeURIComponent(c.dataset.coord)+'&z=16&hl=fr&output=embed';
+  f.title='Carte Google Maps de l’agence de '+c.dataset.nom;f.loading='lazy';f.referrerPolicy='no-referrer-when-downgrade';f.setAttribute('allowfullscreen','');
+  c.innerHTML='';c.appendChild(f);
+}
 function showAg(i){
   const g=AG[i];[...agList.children].forEach((c,k)=>c.setAttribute('aria-selected',k===i));
-  agPanel.innerHTML='<span class="pill">'+(i===0?'SIÈGE SOCIAL':'AGENCE')+'</span><h3>'+g.n+'</h3><p>'+g.a+'<br>'+g.v+'</p><span class="tel">04 56 35 80 10</span><div class="row"><a class="btn" href="tel:+33456358010">Appeler l\'agence</a><a class="btn ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(g.q)+'">Itinéraire</a></div>';
+  agPanel.innerHTML='<span class="pill">'+(i===0?'SIÈGE SOCIAL':'AGENCE')+'</span><h3>'+g.n+'</h3><p>'+g.a+'<br>'+g.v+'</p><span class="tel">04 56 35 80 10</span>'
+   +'<div class="carte" data-coord="'+g.g+'" data-nom="'+g.n+'"><button type="button" aria-label="Afficher la carte Google Maps de l’agence de '+g.n+'">'+PIN+'<b>Afficher la carte</b><small>Google Maps · dépose un cookie Google</small></button></div>'
+   +'<div class="row"><a class="btn" href="tel:+33456358010">Appeler</a><a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/dir/?api=1&destination='+g.g+'">Itinéraire</a></div>';
+  agPanel.querySelector('.carte button').onclick=()=>{mapsOn=true;loadMap()};
+  if(mapsOn)loadMap();
 }
 showAg(0);
 
@@ -504,9 +560,9 @@ showAg(0);
 document.addEventListener('click',e=>{const a=e.target.closest('[data-pick]');if(a&&$('#sujet'))$('#sujet').value=a.dataset.pick});
 
 /* Formulaire
-   Pour recevoir les demandes par e-mail : indiquer l'adresse de l'agence ci-dessous
-   (envoi via le service FormSubmit, activé par un e-mail de confirmation au premier envoi). */
-const FORM_EMAIL='';
+   Envoi par Formspree : coller ci-dessous l'identifiant du formulaire (ex. "xayzabcd").
+   Tant qu'il est vide, rien n'est envoyé et le site reste en mode présentation. */
+const FORMSPREE_ID='';
 const form=$('#form');
 form.addEventListener('submit',async e=>{
   e.preventDefault();let ok=true;
@@ -517,11 +573,11 @@ form.addEventListener('submit',async e=>{
   if(!ok)return;
   const d=Object.fromEntries(new FormData(form)),btn=form.querySelector('button[type=submit]');
   let sent=false;
-  if(FORM_EMAIL){
+  if(FORMSPREE_ID){
     btn.disabled=true;btn.textContent='Envoi en cours…';
     try{
-      const r=await fetch('https://formsubmit.co/ajax/'+encodeURIComponent(FORM_EMAIL),{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
-        body:JSON.stringify({_subject:'Site Elyott — '+d.sujet,Demande:d.sujet,Nom:d.nom,'Prénom':d.prenom,'E-mail':d.email,'Téléphone':d.tel||'—',Message:d.msg||'—',_replyto:d.email,_template:'table'})});
+      const r=await fetch('https://formspree.io/f/'+encodeURIComponent(FORMSPREE_ID),{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify({_subject:'Site Elyott — '+d.sujet,Demande:d.sujet,Nom:d.nom,'Prénom':d.prenom,email:d.email,'Téléphone':d.tel||'—',Message:d.msg||'—'})});
       sent=r.ok;
     }catch(_){sent=false}
     if(!sent){
@@ -536,6 +592,41 @@ form.addEventListener('submit',async e=>{
   $('#again').onclick=()=>location.reload();
 });
 form.addEventListener('input',e=>{const l=e.target.closest('label.err');if(l){l.classList.remove('err');l.querySelector('em').textContent=''}});
+
+/* Consentement aux cookies (règles CNIL) :
+   aucun traceur avant acceptation, refuser est aussi simple qu'accepter,
+   choix conservé 6 mois, retirable à tout moment via « Gérer les cookies ». */
+const GA_MEASUREMENT_ID='[G-XXXXXXXXXX À COMPLÉTER]'; /* tant qu'il est entre crochets, Google Analytics n'est pas chargé */
+const CK='ely_consent',SIX_MOIS=1000*60*60*24*182;
+function readConsent(){try{const o=JSON.parse(localStorage.getItem(CK)||'null');if(!o||typeof o.date!=='number')return null;if(Date.now()-o.date>SIX_MOIS){localStorage.removeItem(CK);return null}return o}catch(e){return null}}
+(function(){
+  const bar=$('#cookies'),det=$('#ckDetails'),tog=$('#ckToggle'),ana=$('#ckAna'),maps=$('#ckMaps');
+  let gaLoaded=false;
+  function loadGA(){
+    if(gaLoaded||!GA_MEASUREMENT_ID||GA_MEASUREMENT_ID[0]==='[')return;gaLoaded=true;
+    const sc=document.createElement('script');sc.async=true;sc.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(GA_MEASUREMENT_ID);document.head.appendChild(sc);
+    window.dataLayer=window.dataLayer||[];function gtag(){window.dataLayer.push(arguments)}window.gtag=gtag;
+    gtag('js',new Date());gtag('config',GA_MEASUREMENT_ID,{anonymize_ip:true,allow_google_signals:false,allow_ad_personalization_signals:false});
+  }
+  const open=()=>{bar.hidden=false;requestAnimationFrame(()=>bar.classList.add('open'))};
+  const close=()=>{bar.classList.remove('open');setTimeout(()=>{bar.hidden=true},450)};
+  function apply(a,m){
+    try{localStorage.setItem(CK,JSON.stringify({analytics:!!a,cartes:!!m,date:Date.now()}))}catch(e){}
+    if(a)loadGA();
+    if(m){mapsOn=true;loadMap()}
+    close();
+  }
+  const c=readConsent();
+  if(!c)setTimeout(open,700);else{if(c.analytics){loadGA();ana.checked=true}if(c.cartes){maps.checked=true;mapsOn=true;loadMap()}}
+  $('#ckAccept').onclick=()=>{ana.checked=maps.checked=true;apply(true,true)};
+  $('#ckRefuse').onclick=()=>{ana.checked=maps.checked=false;apply(false,false)};
+  $('#ckSave').onclick=()=>apply(ana.checked,maps.checked);
+  function details(show){det.hidden=!show;tog.setAttribute('aria-expanded',String(show));tog.textContent=show?'Masquer les choix détaillés':'Choix détaillés'}
+  tog.onclick=()=>details(det.hidden);
+  function reopen(){const k=readConsent();ana.checked=!!(k&&k.analytics);maps.checked=!!(k&&k.cartes);details(true);open()}
+  $$('[data-cookies-reopen]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();reopen()}));
+  if(location.hash==='#cookies-gestion')setTimeout(reopen,300);
+})();
 </script>
 </body>
 </html>
