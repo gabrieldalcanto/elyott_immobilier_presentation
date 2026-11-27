@@ -227,9 +227,9 @@ footer{background:var(--navy);color:#DCE3F5;padding:64px 0 32px;font-size:14px}
   .badge svg{width:24px;height:24px}
   .cta .btn{flex:1 1 100%}
   section.block{padding:56px 0}
-  .cards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;margin:0 -20px;padding:12px 20px 16px;scroll-padding:0 20px;scrollbar-width:none}
+  .cards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;margin:0 -20px;padding:12px max(9vw,calc(50vw - 170px)) 16px;scrollbar-width:none}
   .cards::-webkit-scrollbar{display:none}
-  .card{flex:0 0 82%;scroll-snap-align:center;min-height:300px;transition:none}
+  .card{flex:0 0 min(82vw,340px);scroll-snap-align:center;min-height:300px;transition:none}
   .card[aria-selected=true]{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--bg)}
   .dots{display:flex}
   .detail,.about,.ag-grid,.contact-card{grid-template-columns:minmax(0,1fr)}
@@ -493,18 +493,33 @@ const cards=$('#cards'),detail=$('#detail'),dots=$('#dots');
 METIERS.forEach((m,i)=>{
   const b=document.createElement('button');b.className='card';b.type='button';b.setAttribute('role','tab');b.style.cssText='--bg:'+m.bg+';--fg:'+m.fg;
   b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+m.icon+'</svg><h3>'+m.t+'</h3><p>'+m.s+'</p><span class="more">En savoir plus <span aria-hidden="true">↓</span></span>';
-  b.onclick=()=>{showMetier(i);if(!wide())detail.scrollIntoView({behavior:'smooth',block:'nearest'})};
+  b.onclick=()=>showMetier(i,true);
   cards.append(b);dots.append(document.createElement('i'));
 });
-function showMetier(i){
+let metier=-1;
+function centerCard(i){
+  const c=cards.children[i];if(!c||cards.scrollWidth<=cards.clientWidth+2)return;
+  const pr=cards.getBoundingClientRect(),cr=c.getBoundingClientRect();
+  cards.scrollTo({left:cards.scrollLeft+(cr.left-pr.left)-(pr.width-cr.width)/2,behavior:calm?'auto':'smooth'});
+}
+function showMetier(i,center){
+  if(center)centerCard(i);
+  if(i===metier)return;metier=i;
+  [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
   const m=METIERS[i];
   [...cards.children].forEach((c,k)=>c.setAttribute('aria-selected',k===i));
   detail.style.setProperty('--tone',m.bg);
   detail.innerHTML='<div><h3>'+m.h+'</h3><p class="sub">'+m.s+'</p><a class="btn" href="#contact" data-pick="'+m.pick.replace(/"/g,'&quot;')+'">'+m.cta+'</a></div><ul>'+m.pts.map((p,k)=>'<li style="animation-delay:'+(k*0.08)+'s">'+CHECK+'<span>'+p+'</span></li>').join('')+'</ul>';
 }
 showMetier(0);
-function syncDots(){const w=cards.scrollWidth-cards.clientWidth;const i=w>0?Math.round(cards.scrollLeft/w*(METIERS.length-1)):0;[...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i))}
-let dt=false;cards.addEventListener('scroll',()=>{if(!dt){dt=true;requestAnimationFrame(()=>{dt=false;syncDots()})}},{passive:true});syncDots();
+/* Sur mobile : la carte amenée au centre en glissant devient la carte sélectionnée */
+let settle;
+cards.addEventListener('scroll',()=>{clearTimeout(settle);settle=setTimeout(()=>{
+  if(cards.scrollWidth<=cards.clientWidth+2)return;
+  const mid=cards.getBoundingClientRect().left+cards.clientWidth/2;let best=0,gap=1e9;
+  [...cards.children].forEach((c,k)=>{const r=c.getBoundingClientRect(),g=Math.abs(r.left+r.width/2-mid);if(g<gap){gap=g;best=k}});
+  showMetier(best);
+},110)},{passive:true});
 
 /* Je suis… */
 const PROFILS=[
@@ -521,7 +536,7 @@ PROFILS.forEach((p,i)=>{
     current=current===i?-1:i;
     [...chips.children].forEach((c,k)=>c.setAttribute('aria-pressed',k===current));
     advice.classList.toggle('open',current>=0);
-    if(current>=0){$('#adviceText').innerHTML=p.txt;const a=$('#adviceBtn');a.textContent=p.cta;a.dataset.pick=p.pick;showMetier(p.m)}
+    if(current>=0){$('#adviceText').innerHTML=p.txt;const a=$('#adviceBtn');a.textContent=p.cta;a.dataset.pick=p.pick;showMetier(p.m,true)}
   };
   chips.append(b);
 });
