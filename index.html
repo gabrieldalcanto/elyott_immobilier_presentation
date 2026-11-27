@@ -217,13 +217,14 @@ footer{background:var(--navy);color:#DCE3F5;padding:64px 0 32px;font-size:14px}
   .bar{height:68px}.logo img{height:36px}
   html{scroll-padding-top:76px}
   .wrap{padding:0 20px}
-  .hero .wrap{grid-template-columns:minmax(0,1fr);gap:18px;padding-top:0;padding-bottom:44px}
-  .visual{order:-1;min-height:0;height:276px}
-  .disc{top:0;left:auto;right:-20px;width:276px;height:276px}
-  .halo{transform:scale(1.3) rotate(65deg);background:linear-gradient(270deg,rgba(255,255,255,0) 30%,rgba(27,42,107,.13) 84%);animation:none}
-  .photo{border-radius:9999px 0 9999px 9999px}
-  .badge{left:8px;bottom:6px;width:78px;height:78px;font-size:9px}
-  .badge svg{width:22px;height:22px}
+  .hero{--w:min(calc((100vw - 28px) * .7),320px)}
+  .hero .wrap{grid-template-columns:minmax(0,1fr);gap:32px;padding-top:43px;padding-bottom:44px}
+  .visual{order:-1;min-height:0;height:var(--w);margin-right:-6px}
+  .disc{left:auto;right:calc(var(--w) * -.235);top:calc(-48px - var(--w) * .185);width:calc(var(--w) * 1.47);height:calc(var(--w) * 1.37)}
+  .halo{inset:-15%;transform:none;background:linear-gradient(335deg,rgba(255,255,255,0) 30%,rgba(45,21,130,.12) 84%);animation:none}
+  .photo{border-radius:50% 0 50% 50%}
+  .badge{left:8.5%;top:75%;bottom:auto;width:23.7%;height:auto;aspect-ratio:1;font-size:10px}
+  .badge svg{width:24px;height:24px}
   .cta .btn{flex:1 1 100%}
   section.block{padding:56px 0}
   .cards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;margin:0 -20px;padding:12px 20px 16px;scroll-padding:0 20px;scrollbar-width:none}
